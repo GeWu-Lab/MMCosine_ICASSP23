@@ -5,9 +5,11 @@
 
 **Authors: [Ruize Xu](https://rick-xu315.github.io/), Ruoxuan Feng, Shi-xiong Zhang, [Di Hu](https://dtaoo.github.io/)**
 
-:rocket: Project page here, including supplementary material: [Project Page](https://gewu-lab.github.io/MMCosine/)
+:rocket: Project page here: [Project Page](https://gewu-lab.github.io/MMCosine/)
 
 :page_facing_up: Paper here: [Paper](https://rick-xu315.github.io/MMCosine.pdf)
+
+:mag: Supplementary material: [Supplementary](https://rick-xu315.github.io/ICASSP23_Sup.pdf)
 
 
 
