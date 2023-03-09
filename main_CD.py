@@ -65,8 +65,6 @@ def get_arguments():
     parser.add_argument('--lr_decay_step', default=100, type=int, help='where learning rate decays')
     parser.add_argument('--lr_decay_ratio', default=0.1, type=float, help='decay coefficient')
 
-    parser.add_argument('--alpha', default=0, type=float, help='alpha in OGM-GE')
-
     #parser.add_argument('--ckpt_path', required=True, type=str, help='path to save trained models')
     parser.add_argument('--ckpt_path', default='./log', type=str, help='path to save trained models')
     parser.add_argument('--train', action='store_true', help='turn on train mode')
@@ -117,6 +115,7 @@ def train_epoch(args, epoch, model, device, dataloader, optimizer, writer=None):
             out_v = torch.mm(F.normalize(v,dim=1), F.normalize(torch.transpose(model.module.fusion_module.fc_out.weight[:, 512:], 0, 1),dim=0))  
             out_a=out_a*args.scaling
             out_v=out_v*args.scaling
+            out=out_a+out_v
         else:
             out_a = (torch.mm(a, torch.transpose(model.module.fusion_module.fc_out.weight[:, :512], 0, 1)) +
                      model.module.fusion_module.fc_out.bias / 2)
@@ -131,7 +130,7 @@ def train_epoch(args, epoch, model, device, dataloader, optimizer, writer=None):
                 fy_v=torch.mean(torch.sum(out_v*label_onehot,dim=1))
                 fy_a=torch.mean(torch.sum(out_a*label_onehot,dim=1))
                 iteration = epoch * len(dataloader) + step
-                #print(ma.shape)
+                
                 writer.add_scalar('data/logit_a', fy_a, iteration)
                 writer.add_scalar('data/logit_v', fy_v, iteration)
             
@@ -294,9 +293,8 @@ def main():
                 writer_path = os.path.join(args.tensorboard_path)
                 if not os.path.exists(writer_path):
                     os.mkdir(writer_path)
-                log_name = '{}_alpha_{}_optimizer_{}_pre_a{}_pre_v{}_dataset_{}_mmcosine{}{}'.format(
+                log_name = '{}_optimizer_{}_pre_a{}_pre_v{}_dataset_{}_mmcosine{}{}'.format(
                                                                                   args.fusion_method,
-                                                                                  args.alpha,
                                                                                   args.optimizer,                                                                              
                                                                                   args.audio_pretrain,
                                                                                   args.visual_pretrain,
@@ -332,10 +330,9 @@ def main():
                 if not os.path.exists(args.ckpt_path):
                     os.mkdir(args.ckpt_path)
 
-                model_name = 'best_model_of_dataset_{}_{}_alpha_{}_' \
+                model_name = 'best_model_of_dataset_{}_{}' \
                              'optimizer_{}_pre_a{}_pre_v{}_mmcosine_{}{}.pth'.format(args.dataset,
                                                                                   args.fusion_method,
-                                                                                  args.alpha,
                                                                                   args.optimizer,                                                                                  
                                                                                   args.audio_pretrain,
                                                                                   args.visual_pretrain,
@@ -344,7 +341,6 @@ def main():
                                                                                                                                                              
                                                                                   )
                 saved_dict = {'saved_epoch': epoch, 
-                              'alpha': args.alpha,
                               'fusion': args.fusion_method,
                               'acc': acc,
                               'model': model.state_dict(),
@@ -365,7 +361,6 @@ def main():
         # first load trained model
         loaded_dict = torch.load(args.ckpt_path)
         # epoch = loaded_dict['saved_epoch']
-        # alpha = loaded_dict['alpha']
         fusion = loaded_dict['fusion']
         state_dict = loaded_dict['model']
         # optimizer_dict = loaded_dict['optimizer']

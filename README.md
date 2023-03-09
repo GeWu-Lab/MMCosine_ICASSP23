@@ -12,8 +12,8 @@ To do:
 
 ```BibTeX
 @article{ruize2023mmcosine,
-  author={Ruize, Xu and Ruoxuan, Feng and Shi-xiong, Zhang. and Di, Hu},
-  booktitle={ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  author={Ruize, Xu and Ruoxuan, Feng and Shi-xiong, Zhang， and Di, Hu},
+  booktitle={ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
   year={2023},
   organization={IEEE},
 }

@@ -64,9 +64,9 @@ class train_dataset_loader(Dataset):
     def __init__(self, max_frames, **kwargs):
 
         # self.augment_wav = AugmentWAV(musan_path=musan_path, rir_path=rir_path, max_frames = max_frames)
-        self.audio_path = '/home/ruize_xu/data/vox2-audio/train'
-        self.video_path = '/home/ruize_xu/data/vox2-png-2fps/train'
-        self.train_list = '/home/ruize_xu/ruoxuan/CD/train_vox2.csv'
+        self.audio_path = '{PATH OF VOX2 AUDIO}/train'
+        self.video_path = '{PATH OF VOX2 IMAGE}/train'
+        self.train_list = '../data/vox/train_vox2.csv'
         self.max_frames = max_frames
         # self.musan_path = musan_path
         # self.rir_path   = rir_path
@@ -157,9 +157,9 @@ class test_dataset_loader(Dataset):
     def __init__(self, eval_frames, num_eval, **kwargs):
         self.max_frames = eval_frames
         self.num_eval   = num_eval
-        self.audio_path = '/home/ruize_xu/data/vox2-audio/test'
-        self.video_path = '/home/ruize_xu/data/vox2-png-2fps/test'
-        self.test_list = '/home/ruize_xu/ruoxuan/CD/test_pairs.csv'
+        self.audio_path = '{PATH OF VOX2 AUDIO}/test'
+        self.video_path = '{PATH OF VOX2 IMAGE}/test'
+        self.test_list = '../data/test_pairs.csv'
 
         self.audio_list1 = []
         self.video_list1 = []
@@ -292,111 +292,14 @@ class train_dataset_sampler(torch.utils.data.Sampler):
         self.epoch = epoch
 
 
-class train_dataset_loader_ddp(Dataset):
-    def __init__(self, max_frames, **kwargs):
-
-        # self.augment_wav = AugmentWAV(musan_path=musan_path, rir_path=rir_path, max_frames = max_frames)
-        self.audio_path = '/data/users/public/vox_audio/vox/voxceleb2'
-        self.video_path = '/data/users/public/vox2/vox2-png-2fps/train'
-        self.train_list = '/home/ruize_xu/ruoxuan/CD/train_vox2.csv'
-        self.max_frames = max_frames
-        # self.musan_path = musan_path
-        # self.rir_path   = rir_path
-        # self.augment    = augment
-
-        id_set = set()
-        id_list = []
-        self.png_num = []
-        self.audio_list = []
-        self.video_list = []
-        
-        # Read training files
-        with open(self.train_list) as dataset_file:
-            csv_reader = csv.reader(dataset_file)
-            for item in csv_reader:
-                audio_name = self.audio_path+item[0]
-                video_name = self.video_path+item[1]
-                self.audio_list.append(audio_name)
-                self.video_list.append(video_name)
-                self.png_num.append(int(item[3]))
-                id_list.append(item[2])
-                id_set.add(item[2])
-
-
-        # Make a dictionary of ID names and ID indices
-        dictkeys = list(id_set)
-        dictkeys.sort()
-        dictkeys = { key : ii for ii, key in enumerate(dictkeys) }
-
-        # Parse the training list into file names and ID indices
-        self.data_label = []
-        for id in id_list:
-            self.data_label.append(dictkeys[id])
-
-
-    def __getitem__(self, indices):
-
-        # feat = []
-        # print(self.audio_list[index])
-        transf = transforms.Compose([
-                    transforms.RandomResizedCrop(224),
-                    transforms.RandomHorizontalFlip(),
-                    transforms.ToTensor(),
-                    transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
-                ])
-
-        feat = []
-        all_image = []
-
-        for index in indices:
-            audio = loadWAV(self.audio_list[index], self.max_frames, evalmode=False)
-            feat.append(audio)
-
-            pick_name = []
-            if self.png_num[index]>=8:
-                pick_name = ['/0000002.png','/0000006.png']
-            elif self.png_num[index]==7:
-                pick_name = ['/0000002.png','/0000005.png']
-            elif self.png_num[index]==6:
-                pick_name = ['/0000002.png','/0000004.png']
-            elif self.png_num[index]==5:
-                pick_name = ['/0000001.png','/0000003.png']
-            else:
-                pick_name = ['/0000000.png','/0000002.png']
-
-
-            for i,name in enumerate(pick_name):
-                
-                # path1.append('frame_0000'+ str(t[i]) + '.jpg')
-                # image.append(Image.open(path + "/" + path1[i]).convert('RGB'))
-                # path1.append(path + '.jpg')
-                open_image = Image.open(self.video_list[index] + name).convert('RGB')
-                
-                t_image = transf(open_image).unsqueeze(1).float()
-                if i==0:
-                    image_n = copy.copy(t_image)
-                else:
-                    image_n = torch.cat((image_n, t_image), 1)
-
-            all_image.append(image_n)
-            
-        feat = numpy.concatenate(feat, axis=0)
-        all_image = numpy.concatenate(all_image, axis=0)
-
-
-        return torch.FloatTensor(feat),torch.FloatTensor(all_image), self.data_label[index]
-
-    def __len__(self):
-        return len(self.audio_list)
-
 
 class vox1_test_dataset_loader(Dataset):
     def __init__(self, eval_frames, num_eval, **kwargs):
         self.max_frames = eval_frames
         self.num_eval   = num_eval
-        self.audio_path = '/home/ruize_xu/data/vox1-audio/'
-        self.video_path = '/home/ruize_xu/data/vox1-png/'
-        self.test_list = '/home/ruize_xu/ruoxuan/CD/veri_test.csv'
+        self.audio_path = '{PATH OF VOX1 TEST SET}/audio'
+        self.video_path = '{PATH OF VOX1 TEST SET}/image'
+        self.test_list = '../data/veri_test.csv'
 
         self.audio_list1 = []
         self.video_list1 = []
