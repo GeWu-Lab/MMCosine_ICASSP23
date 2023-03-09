@@ -5,9 +5,9 @@
 
 **Authors: [Ruize Xu](https://rick-xu315.github.io/), Ruoxuan Feng, Shi-xiong Zhang, [Di Hu](https://dtaoo.github.io/)**
 
-: rocket: Project page here, including supplementary material: [Project Page](https://gewu-lab.github.io/MMCosine/)
+:rocket: Project page here, including supplementary material: [Project Page](https://gewu-lab.github.io/MMCosine/)
 
-: newspaper: Paper here: [Paper](https://rick-xu315.github.io/MMCosine.pdf)
+:page_facing_up: Paper here: [Paper](https://rick-xu315.github.io/MMCosine.pdf)
 
 
 
@@ -41,7 +41,7 @@ Recent studies show that the imbalanced optimization of uni-modal encoders in a 
 
 Apart from fusion methods and scaling parameters, you can also adjust the setting such as ```batch_size```, ```lr_decay```, ```epochs```, *etc*.
 
-You and also record intermediate variables through [tensorboard](https://pytorch.org/docs/stable/tensorboard.html) by nominating ```use_tensorboard``` and ```tensorboard_path``` for saving logs.
+You can also record intermediate variables through [tensorboard](https://pytorch.org/docs/stable/tensorboard.html) by nominating ```use_tensorboard``` and ```tensorboard_path``` for saving logs.
 
 ## Bibtex
 
