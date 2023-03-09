@@ -39,7 +39,7 @@ Recent studies show that the imbalanced optimization of uni-modal encoders in a 
 
  You can train your model on the provided datasets (*e.g.* CREMAD) simply by running:
 
-``` python main_CD --train --fusion_method gated --mmcosine True --scaling 10```
+``` python main_CD.py --train --fusion_method gated --mmcosine True --scaling 10```
 
 Apart from fusion methods and scaling parameters, you can also adjust the setting such as ```batch_size```, ```lr_decay```, ```epochs```, *etc*.
 
