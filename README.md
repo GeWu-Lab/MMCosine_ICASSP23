@@ -37,7 +37,7 @@ Recent studies show that the imbalanced optimization of uni-modal encoders in a 
 
 Apart from fusion methods and scaling parameters, you can also adjust the setting such as ```batch_size```, ```lr_decay```, ```epochs```, *etc*.
 
-You and also record intermediate variables through [tensorboard](https://pytorch.org/docs/stable/tensorboard.html) by nominating ```use_tensorboard``` and ```tensorboard_path``` for saving logs.
+You can also record intermediate variables through [tensorboard](https://pytorch.org/docs/stable/tensorboard.html) by nominating ```use_tensorboard``` and ```tensorboard_path``` for saving logs.
 
 ## Bibtex
 
