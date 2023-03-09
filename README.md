@@ -1,5 +1,9 @@
 # MMCosine_ICASSP23
- This is the code release for ICASSP 2023 Paper "MMCosine: Multi-Modal Cosine Loss Towards Balanced Audio-Visual Fine-Grained Learning", implemented with Pytorch.
+ This is the code release for ICASSP 2023 Paper "*MMCosine: Multi-Modal Cosine Loss Towards Balanced Audio-Visual Fine-Grained Learning*", implemented with Pytorch.
+
+**Title:** **MMCosine: Multi-Modal Cosine Loss Towards Balanced Audio-Visual Fine-Grained Learning**
+
+**Authors: [Ruize Xu](https://rick-xu315.github.io/), Ruoxuan Feng, Shi-xiong Zhang, [Di Hu](https://dtaoo.github.io/)**
 
 : rocket: Project page here, including supplementary material: [Project Page](https://gewu-lab.github.io/MMCosine/)
 
