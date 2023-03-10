@@ -7,7 +7,7 @@
 
 :rocket: Project page here, including supplementary material: [Project Page](https://gewu-lab.github.io/MMCosine/)
 
-:page_facing_up: Paper here: [Paper](https://rick-xu315.github.io/MMCosine.pdf)
+:page_facing_up: Paper here: [Paper](https://arxiv.org/abs/2303.05338)
 
 
 
