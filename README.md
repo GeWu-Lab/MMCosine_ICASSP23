@@ -5,9 +5,11 @@
 
 **Authors: [Ruize Xu](https://rick-xu315.github.io/), Ruoxuan Feng, Shi-xiong Zhang, [Di Hu](https://dtaoo.github.io/)**
 
-:rocket: Project page here, including supplementary material: [Project Page](https://gewu-lab.github.io/MMCosine/)
+:rocket: Project page here: [Project Page](https://gewu-lab.github.io/MMCosine/)
 
 :page_facing_up: Paper here: [Paper](https://arxiv.org/abs/2303.05338)
+
+:mag: Supplementary material: [Supplementary](https://rick-xu315.github.io/ICASSP23_Sup.pdf)
 
 
 
@@ -37,7 +39,7 @@ Recent studies show that the imbalanced optimization of uni-modal encoders in a 
 
  You can train your model on the provided datasets (*e.g.* CREMAD) simply by running:
 
-``` python main_CD --train --fusion_method gated --mmcosine True --scaling 10```
+``` python main_CD.py --train --fusion_method gated --mmcosine True --scaling 10```
 
 Apart from fusion methods and scaling parameters, you can also adjust the setting such as ```batch_size```, ```lr_decay```, ```epochs```, *etc*.
 
