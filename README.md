@@ -50,11 +50,13 @@ You can also record intermediate variables through [tensorboard](https://pytorch
 If you find this work useful, please consider citing it.
 
 ```BibTeX
-@article{ruize2023mmcosine,
-  author={Ruize, Xu and Ruoxuan, Feng and Shi-xiong, Zhang, and Di, Hu},
+@inproceedings{xu2023mmcosine,
+  title={MMCosine: Multi-Modal Cosine Loss Towards Balanced Audio-Visual Fine-Grained Learning},
+  author={Xu, Ruize and Feng, Ruoxuan and Zhang, Shi-Xiong and Hu, Di},
   booktitle={ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},
+  pages={1--5},
   year={2023},
-  organization={IEEE},
+  organization={IEEE}
 }
 ```
 
