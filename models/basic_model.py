@@ -31,9 +31,9 @@ class AVClassifier(nn.Module):
         if fusion == 'concat':
             self.fusion_module = ConcatFusion(output_dim=n_classes)
         elif fusion == 'film':
-            self.fusion_module = FiLM(output_dim=n_classes, x_film=True)
+            self.fusion_module = FiLM(output_dim=n_classes)
         elif fusion == 'gated':
-            self.fusion_module = GatedFusion(output_dim=n_classes, x_gate=True)
+            self.fusion_module = GatedFusion(output_dim=n_classes)
         else:
             raise NotImplementedError('Incorrect fusion method: {}!'.format(fusion))
 
